@@ -8,7 +8,7 @@
 #include "startwindow.h"
 #include "gamesettingswindow.h"
 #include "invitationwindow.h"
-//#include "battlefield.h"
+#include "battlefield.h"
 
 using namespace std;
 
@@ -24,7 +24,7 @@ private:
     unique_ptr<StartWindow> startWin;
     unique_ptr<GameSettingsWindow> GameSetsWin;
     unique_ptr<InvitationWindow> InvitWin;
-    //unique_ptr<Battlefield> battlefield;
+    unique_ptr<Battlefield> battlefield;
 };
 
 #endif // GAME_H
