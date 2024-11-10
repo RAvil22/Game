@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>GameSettinsWindow</class>
- <widget class="QWidget" name="GameSettinsWindow">
+ <class>GameSettingsWindow</class>
+ <widget class="QWidget" name="GameSettingsWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -169,8 +169,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>354</width>
-               <height>467</height>
+               <width>351</width>
+               <height>459</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_3"/>

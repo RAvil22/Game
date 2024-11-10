@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(InvitationWindow VERSION 0.1 LANGUAGES CXX)
+project(Game VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -12,47 +12,58 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
-
-set(INVWIN_SOURCES
-    invitationwindow.cpp
-    invitationwindow.h
-    invitationwindow.ui
+set(PROJECT_SOURCES
+        main.cpp
+        game.h
+        game.cpp
 )
 
+add_subdirectory(StartWindow)
+add_subdirectory(InvitationWindow)
+add_subdirectory(SettingsWindow)
+
+
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_library(InvitationWindow
+    qt_add_executable(Game
         MANUAL_FINALIZATION
-        ${INVWIN_SOURCES}
+        ${PROJECT_SOURCES}
     )
 # Define target properties for Android with Qt 6 as:
-#    set_property(TARGET InvitationWindow APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+#    set_property(TARGET Game APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
-
 else()
     if(ANDROID)
-        add_library(InvitationWindow SHARED
-            ${INVWIN_SOURCES}
+        add_library(Game SHARED
+            ${PROJECT_SOURCES}
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
-        add_executable(InvitationWindow
-            ${INVWIN_SOURCES}
+        add_executable(Game
+            ${PROJECT_SOURCES}
         )
     endif()
-
 endif()
 
-target_link_libraries(InvitationWindow PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Game PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+
+target_link_libraries(Game PRIVATE StartWindow)
+target_include_directories(Game PRIVATE "${PROJECT_SOURCE_DIR}/StartWindow")
+
+target_link_libraries(Game PRIVATE InvitationWindow)
+target_include_directories(Game PRIVATE "${PROJECT_SOURCE_DIR}/InvitationWindow")
+
+target_link_libraries(Game PRIVATE SettingsWindow)
+target_include_directories(Game PRIVATE "${PROJECT_SOURCE_DIR}/SettingsWindow")
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
 if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.InvitationWindow)
+  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.Game)
 endif()
-set_target_properties(InvitationWindow PROPERTIES
+set_target_properties(Game PROPERTIES
     ${BUNDLE_ID_OPTION}
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -61,12 +72,12 @@ set_target_properties(InvitationWindow PROPERTIES
 )
 
 include(GNUInstallDirs)
-install(TARGETS InvitationWindow
+install(TARGETS Game
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(InvitationWindow)
+    qt_finalize_executable(Game)
 endif()

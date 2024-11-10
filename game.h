@@ -6,8 +6,8 @@
 #include <memory>
 
 #include "startwindow.h"
-//#include "gamesettinswindow.h"
-//#include "invitationwindow.h"
+#include "gamesettingswindow.h"
+#include "invitationwindow.h"
 //#include "battlefield.h"
 
 using namespace std;
@@ -22,8 +22,8 @@ signals:
 
 private:
     unique_ptr<StartWindow> startWin;
-    //unique_ptr<GameSettinsWindow> GameSetsWin;
-    //unique_ptr<InvitationWindow> InvitWin;
+    unique_ptr<GameSettingsWindow> GameSetsWin;
+    unique_ptr<InvitationWindow> InvitWin;
     //unique_ptr<Battlefield> battlefield;
 };
 
