@@ -2,6 +2,10 @@
 #define BATTLEFIELD_H
 
 #include <QWidget>
+#include <QList>
+#include <QGraphicsScene>
+
+
 
 namespace Ui {
 class Battlefield;
@@ -17,6 +21,10 @@ public:
 
 private:
     Ui::Battlefield *ui;
+    QGraphicsScene* battlefield;
+    // QList<Unit*> playerUnits;
+    // QList<Unit*> opponentUnits;
+    // Unit* currentUnit;
 };
 
 #endif // BATTLEFIELD_H

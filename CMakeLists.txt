@@ -10,7 +10,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Network)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Network)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -19,8 +21,8 @@ set(PROJECT_SOURCES
 )
 
 add_subdirectory(StartWindow)
-add_subdirectory(InvitationWindow)
 add_subdirectory(SettingsWindow)
+add_subdirectory(InvitationWindow)
 add_subdirectory(BattlefieldWindow)
 
 
@@ -47,7 +49,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(Game PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Game PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network)
 
 target_link_libraries(Game PRIVATE StartWindow)
 target_include_directories(Game PRIVATE "${PROJECT_SOURCE_DIR}/StartWindow")

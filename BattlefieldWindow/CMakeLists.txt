@@ -15,11 +15,11 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 set(BATTLE_SOURCES
         battlefield.cpp
         battlefield.h
-        battlefield.cpp
+        battlefield.ui
 )
 
-add_subdirectory(SpecialTricks)
-add_subdirectory(Items)
+#add_subdirectory(SpecialTricks)
+#add_subdirectory(Items)
 add_subdirectory(Department)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -49,11 +49,11 @@ endif()
 
 target_link_libraries(BattlefieldWindow PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
-target_link_libraries(BattlefieldWindow PRIVATE SpecialTricks)
-target_include_directories(BattlefieldWindow PRIVATE "${PROJECT_SOURCE_DIR}/SpecialTricks")
+#target_link_libraries(BattlefieldWindow PRIVATE SpecialTricks)
+#target_include_directories(BattlefieldWindow PRIVATE "${PROJECT_SOURCE_DIR}/SpecialTricks")
 
-target_link_libraries(BattlefieldWindow PRIVATE Items)
-target_include_directories(BattlefieldWindow PRIVATE "${PROJECT_SOURCE_DIR}/Items")
+#target_link_libraries(BattlefieldWindow PRIVATE Items)
+#target_include_directories(BattlefieldWindow PRIVATE "${PROJECT_SOURCE_DIR}/Items")
 
 target_link_libraries(BattlefieldWindow PRIVATE Department)
 target_include_directories(BattlefieldWindow PRIVATE "${PROJECT_SOURCE_DIR}/Department")

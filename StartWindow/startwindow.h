@@ -18,7 +18,8 @@ class StartWindow : public QWidget
 public:
     StartWindow(QWidget *parent = nullptr);
     ~StartWindow();
-
+signals:
+    void playerName(QString);
 private:
     Ui::StartWindow *ui;
 };

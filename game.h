@@ -2,11 +2,11 @@
 #define GAME_H
 
 #include <QObject>
-
-#include <memory>
+#include <QtNetwork/QTcpSocket>
+#include <QString>
 
 #include "startwindow.h"
-#include "gamesettingswindow.h"
+//#include "gamesettingswindow.h"
 #include "invitationwindow.h"
 #include "battlefield.h"
 
@@ -21,10 +21,24 @@ public:
 signals:
 
 private:
-    unique_ptr<StartWindow> startWin;
-    unique_ptr<GameSettingsWindow> GameSetsWin;
-    unique_ptr<InvitationWindow> InvitWin;
-    unique_ptr<Battlefield> battlefield;
+    StartWindow* startWin;
+    //GameSettingsWindow* gameSetsWin;
+    InvitationWindow* invitWin;
+    Battlefield* battlefield;
+
+    QTcpSocket* serverConnection;
+
+    void makeStartWinConnects(void);
+    void makeGameSetsWinConnects(void);
+    void makeInvWinConnects(void);
+    void makeBattleWinConnects(void);
+
+    QString playerNickname;
+    uint64_t passwordHash{0};
+
+private slots:
+    ///StartWinSlots
+    void setPlayerName(QString name);
 };
 
 #endif // GAME_H
