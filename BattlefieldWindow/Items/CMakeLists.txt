@@ -17,6 +17,9 @@ set(PROJECT_SOURCES
     items.h
 )
 
+add_subdirectory(Unit)
+add_subdirectory(Cell)
+
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_library(Items
         MANUAL_FINALIZATION
@@ -42,6 +45,12 @@ else()
 endif()
 
 target_link_libraries(Items PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+
+target_link_libraries(Items PUBLIC Unit)
+target_include_directories(Items PUBLIC "${PROJECT_SOURCE_DIR}/Unit")
+
+target_link_libraries(Items PUBLIC Cell)
+target_include_directories(Items PUBLIC "${PROJECT_SOURCE_DIR}/Cell")
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
