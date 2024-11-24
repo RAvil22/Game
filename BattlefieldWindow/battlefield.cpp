@@ -10,12 +10,26 @@ Battlefield::Battlefield(QWidget *parent)
     battlefield = new QGraphicsScene;
     ui->graphicsView->setScene(battlefield);
 
-    // Unit* newUnit = new Unit();
-    // playerUnits.append(newUnit);
+    unitCharacter::CharacterProperties charProperties;
+    charProperties.name = "Равиль";
+    charProperties.surname = "Абдуллин";
+    charProperties.department = "ОУОС";
+    charProperties.charSpecialTrick = "Я художник, я так вижу!";
+    charProperties.specialTrickUses = "INFINITE";
+    charProperties.strength = 10;
+    charProperties.dextrerity = 10;
+    charProperties.reaction = 10;
+    charProperties.initialRage = 5;
+    charProperties.initialHealth = 100;
+    charProperties.initialMorale = 100;
+    charProperties.initialTiredness = 0;
 
-    // battlefield->addItem(newUnit);
+    Unit* newUnit = new Unit(charProperties);
+    playerUnits.append(newUnit);
 
-    // newUnit->setPos(50,50);
+    battlefield->addItem(newUnit);
+
+    newUnit->setPos(25, 75);
 }
 
 Battlefield::~Battlefield()

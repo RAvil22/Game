@@ -18,10 +18,13 @@ set(PROJECT_SOURCES
     unit.cpp
 )
 
+add_subdirectory(Character)
+
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_library(Unit
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Unit APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -43,6 +46,9 @@ else()
 endif()
 
 target_link_libraries(Unit PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+
+target_link_libraries(Unit PUBLIC Character)
+target_include_directories(Unit PUBLIC "${PROJECT_SOURCE_DIR}/Character")
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
