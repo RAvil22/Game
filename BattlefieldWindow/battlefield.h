@@ -7,7 +7,7 @@
 
 #include "department.h"
 #include "specialtrick.h"
-#include "items.h"
+#include "battlescene.h"
 
 namespace Ui {
 class Battlefield;
@@ -23,10 +23,7 @@ public:
 
 private:
     Ui::Battlefield *ui;
-    QGraphicsScene* battlefield;
-    QList<Unit*> playerUnits;
-    QList<Unit*> opponentUnits;
-    Unit* currentUnit;
+    BattleScene* battleScene;
 };
 
 #endif // BATTLEFIELD_H

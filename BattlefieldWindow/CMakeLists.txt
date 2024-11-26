@@ -20,7 +20,7 @@ set(BATTLE_SOURCES
 
 add_subdirectory(Department)
 add_subdirectory(SpecialTricks)
-add_subdirectory(Items)
+add_subdirectory(BattleScene)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_library(BattlefieldWindow
@@ -55,8 +55,8 @@ target_include_directories(BattlefieldWindow PUBLIC "${PROJECT_SOURCE_DIR}/Depar
 target_link_libraries(BattlefieldWindow PUBLIC SpecialTricks)
 target_include_directories(BattlefieldWindow PUBLIC "${PROJECT_SOURCE_DIR}/SpecialTricks")
 
-target_link_libraries(BattlefieldWindow PUBLIC Items)
-target_include_directories(BattlefieldWindow PUBLIC "${PROJECT_SOURCE_DIR}/Items")
+target_link_libraries(BattlefieldWindow PUBLIC BattleScene)
+target_include_directories(BattlefieldWindow PUBLIC "${PROJECT_SOURCE_DIR}/BattleScene")
 
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
