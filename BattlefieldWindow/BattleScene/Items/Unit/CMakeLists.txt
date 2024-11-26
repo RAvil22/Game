@@ -25,7 +25,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
-
+    qt_add_resources(Unit "unit images"
+        PREFIX "/"
+        FILES walk1.png walk2.png
+    )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Unit APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)

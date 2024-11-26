@@ -31,8 +31,8 @@ private:
     unitCharacter::Character* character_;
     QTimer animationTimer;
     uint8_t currentPix{0};
-    // QPixmap* one;
-    // QPixmap* two;
+    QPixmap* one;
+    QPixmap* two;
 
 };
 
