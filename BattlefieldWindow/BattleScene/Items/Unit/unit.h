@@ -2,14 +2,22 @@
 #define UNIT_H
 
 #include <QGraphicsItem>
+#include <QGraphicsItemAnimation>
+#include <QTimeLine>
 #include <QPointF>
 #include <QPixmap>
 #include <QObject>
 #include <QTimer>
 #include <QList>
 #include <QPixmap>
+#include <QList>
 
 #include "character.h"
+#include "animationpixmaps.h"
+
+enum availableUnitActions{UNIT_MOVE, UNIT_ATTACK, UNIT_DEFEND};
+
+
 
 class Unit : public QObject, public QGraphicsItem
 {
@@ -24,16 +32,27 @@ public:
     // bool collidesWithPath(const QPainterPath &path, Qt::ItemSelectionMode mode = Qt::IntersectsItemShape) const override;
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     // void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+
+    bool makeAction(unsigned int actionType, QPointF position);
 signals:
+
 private slots:
-    void choosePix(void){if(!currentPix)currentPix = 1;else currentPix = 0;}
+    void repaintUnit();
 private:
     unitCharacter::Character* character_;
-    QTimer animationTimer;
-    uint8_t currentPix{0};
-    QPixmap* one;
-    QPixmap* two;
+    uint8_t currentPhase{0};
+    QPixmap* currentPixmap;
+    AnimationPixmaps* walkPixmaps;
+    QPointF currentPosition;
 
+    QTimeLine* animationTimeLine;
+    QGraphicsItemAnimation *animation;
+
+    bool move(QPointF newPosition);
+
+    QTimer testTimer;
+protected:
+    void advance(int phase) override;
 };
 
 #endif // UNIT_H

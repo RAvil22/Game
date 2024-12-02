@@ -1,9 +1,5 @@
 #include "battlescene.h"
 
-#include <QImageReader>
-#include <cmath>
-
-
 using namespace std;
 
 BattleScene::BattleScene(QObject *parent)
@@ -12,12 +8,6 @@ BattleScene::BattleScene(QObject *parent)
     setItemIndexMethod(QGraphicsScene::NoIndex);
 
     background = new QBrush;
-    background->setTextureImage(QImage("WorldMap.jpg"));
-    setBackgroundBrush(*background);
-
-    QImageReader reader("WorldMap.jpg");
-    QSize sizeOfImage = reader.size();
-    setSceneRect(0,0, sizeOfImage.width(), sizeOfImage.height());
 
     unitCharacter::CharacterProperties charProperties;
     charProperties.name = "Равиль";
@@ -33,22 +23,43 @@ BattleScene::BattleScene(QObject *parent)
     charProperties.initialMorale = 100;
     charProperties.initialTiredness = 0;
 
-    Unit* newUnit = new Unit(charProperties);
+    newUnit = new Unit(charProperties);
     playerUnits.append(newUnit);
+
 
     this->addItem(newUnit);
 
-    newUnit->setPos(50, 100);
-    qDebug() << "New unit position" << newUnit->scenePos();
+    currentUnit = newUnit;
+
+    updateTimer = new QTimer();
+    updateTimer->setInterval(500);
+
+    connect(updateTimer, &QTimer::timeout, this, &BattleScene::advance);
+    //updateTimer->start();
 }
 
-// void BattleScene::mousePressEvent(QGraphicsSceneMouseEvent *event){
-//     if(event->button() == Qt::LeftButton){
-//         qDebug() << "Left button scene";
-//     }
-//     else if(event->button() == Qt::RightButton){
-//         qDebug() << "Right button scene";
-//     }
-// }
+void BattleScene::setTextureImage(QImage image)
+{
+    background->setTextureImage(image);
+    setBackgroundBrush(*background);
+}
+
+void BattleScene::setBattleSceneSize(QSize size)
+{
+    setSceneRect(0,0, size.width(), size.height());
+}
+
+void BattleScene::mousePressEvent(QGraphicsSceneMouseEvent *event){
+    if(event->button() == Qt::LeftButton){
+        currentUnit->makeAction(UNIT_MOVE, event->scenePos());
+    }
+    else if(event->button() == Qt::RightButton){
+    }
+    else;
+}
+
+bool BattleScene::moveCurrentUnit(const QPointF &pos){
+    return currentUnit->makeAction(UNIT_MOVE, pos);
+}
 
 

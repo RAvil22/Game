@@ -17,21 +17,27 @@ class BattleScene : public QGraphicsScene
     Q_OBJECT
 public:
     explicit BattleScene(QObject *parent = nullptr);
-
+    void setTextureImage(QImage image);
+    void setBattleSceneSize(QSize size);
 public slots:
 
 signals:
 
 protected:
-    // void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 private:
     QBrush* background;
 
     QList<Unit*> playerUnits;
     QList<Unit*> opponentUnits;
     Unit* currentUnit;
+    Unit* newUnit;
 
+
+    QTimer* updateTimer;
 private slots:
+private:
+    bool moveCurrentUnit(const QPointF &pos);
 };
 
 #endif // MAPSCENE_H

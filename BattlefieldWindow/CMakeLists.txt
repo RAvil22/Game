@@ -16,6 +16,7 @@ set(BATTLE_SOURCES
         battlefield.cpp
         battlefield.h
         battlefield.ui
+        resouces.qrc
 )
 
 add_subdirectory(Department)
